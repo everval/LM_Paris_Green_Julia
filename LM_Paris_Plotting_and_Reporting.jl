@@ -2,8 +2,8 @@ using CSV, DataFrames, StatsPlots, TimeSeries
 include("LM_Paris_Functions.jl")
 tablita = CSV.read("Results/LM_Paris_Routine.csv", DataFrame)
 
-generalmarket = ["AAPL", "MSFT", "GOOG", "AMZN", "BAC", "JPM", "NVO", "PFE", "GE", "NVDA", "INTC", "WBD", "NFLX", "DIS", "META", "PRU"]
-energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "F", "PLUG", "FSLR", "SPWR", "BEP", "VWS", "SHELL", "EDPFY", "ORRON"]
+generalmarket = ["AAPL", "MSFT", "GOOG", "AMZN", "BAC", "JPM", "NVO", "PFE", "NVDA", "INTC", "WBD", "NFLX", "DIS", "META", "PRU"]
+energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "F", "PLUG", "FSLR", "SPWR", "BEP", "VWS", "EDPFY", "ORRON"]
 markets = [generalmarket; energy]
 fechas = [Date(2013, 1, 1) Date(2016, 11, 9) Date(2020, 1, 29) Date(2023, 2, 28)]
 
@@ -55,7 +55,7 @@ begin
     p1 = @df tablita_lt_pre_general violin(generalmarket, :LW, side=:left, label="PrePA", linewidth=0)
     @df tablita_lt_post_general violin!(generalmarket, :LW, side=:right, label="PostPA", linewidth=0)
     plot!(ylims=(-0.2, 0.55), size=psize, legend=:topleft, title="Log-Returns, Exact Whittle Estimator, General Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, generalmarket)
+    xticks!(0.5:1:14.5, generalmarket)
     display(p1)
     png("Figures/LM_Paris_General_LW_PRE_LogReturns.png")
 end
@@ -65,7 +65,7 @@ begin
     p1 = @df tablita_lt_pre_general violin(generalmarket, :GPH, side=:left, label="PrePA", linewidth=0)
     @df tablita_lt_post_general violin!(generalmarket, :GPH, side=:right, label="PostPA", linewidth=0)
     plot!(ylims=(-0.2, 0.65), size=psize, legend=:topleft, title="Log-Returns, GPH Estimator, General Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, generalmarket)
+    xticks!(0.5:1:14.5, generalmarket)
     display(p1)
     png("Figures/LM_Paris_General_GPH_PRE_LogReturns.png")
 end
@@ -78,7 +78,7 @@ begin
     p1 = @df tablita_lt_post_general violin(generalmarket, :LW, side=:left, label="PostPA", linewidth=0)
     @df tablita_lt_covid_general violin!(generalmarket, :LW, side=:right, label="COVID", linewidth=0)
     plot!(ylims=(-0.2, 0.6), size=psize, legend=:topleft, title="Log-Returns, Exact Whittle Estimator, General Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, generalmarket)
+    xticks!(0.5:1:14.5, generalmarket)
     display(p1)
     png("Figures/LM_Paris_General_LW_POST_LogReturns.png")
 end
@@ -88,7 +88,7 @@ begin
     p1 = @df tablita_lt_post_general violin(generalmarket, :GPH, side=:left, label="PostPA", linewidth=0)
     @df tablita_lt_covid_general violin!(generalmarket, :GPH, side=:right, label="COVID", linewidth=0)
     plot!(ylims=(-0.2, 0.65), size=psize, legend=:topleft, title="Log-Returns, GPH Estimator, General Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, generalmarket)
+    xticks!(0.5:1:14.5, generalmarket)
     display(p1)
     png("Figures/LM_Paris_General_GPH_POST_LogReturns.png")
 end
@@ -101,7 +101,7 @@ begin
     p2 = @df tablita_lt_pre_energy violin(energy, :LW, side=:left, label="PrePA", linewidth=0)
     @df tablita_lt_post_energy violin!(energy, :LW, side=:right, label="PostPA", linewidth=0)
     plot!(ylims=(-0.2, 0.622), size=psize, legend=:topleft, title="Log-Returns, Exact Whittle Estimator, Energy Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, energy)
+    xticks!(0.5:1:14.5, energy)
     display(p2)
     png("Figures/LM_Paris_Energy_LW_PRE_LogReturns.png")
 end
@@ -111,7 +111,7 @@ begin
     p2 = @df tablita_lt_pre_energy violin(energy, :GPH, side=:left, label="PrePA", linewidth=0)
     @df tablita_lt_post_energy violin!(energy, :GPH, side=:right, label="PostPA", linewidth=0)
     plot!(ylims=(-0.1, 0.75), size=psize, legend=:topleft, title="Log-Returns, GPH Estimator, Energy Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, energy)
+    xticks!(0.5:1:14.5, energy)
     display(p2)
     png("Figures/LM_Paris_Energy_GPH_PRE_LogReturns.png")
 end
@@ -124,7 +124,7 @@ begin
     p2 = @df tablita_lt_post_energy violin(energy, :LW, side=:left, label="PostPA", linewidth=0)
     @df tablita_lt_covid_energy violin!(energy, :LW, side=:right, label="COVID", linewidth=0)
     plot!(ylims=(-0.2, 0.8), size=psize, legend=:topleft, title="Log-Returns, Exact Whittle Estimator, Energy Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, energy)
+    xticks!(0.5:1:14.5, energy)
     display(p2)
     png("Figures/LM_Paris_Energy_LW_POST_LogReturns.png")
 end
@@ -134,7 +134,7 @@ begin
     p2 = @df tablita_lt_post_energy violin(energy, :GPH, side=:left, label="PostPA", linewidth=0)
     @df tablita_lt_covid_energy violin!(energy, :GPH, side=:right, label="COVID", linewidth=0)
     plot!(ylims=(-0.05, 0.8), size=psize, legend=:topleft, title="Log-Returns, GPH Estimator, Energy Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, energy)
+    xticks!(0.5:1:14.5, energy)
     display(p2)
     png("Figures/LM_Paris_Energy_GPH_POST_LogReturns.png")
 end
@@ -146,7 +146,7 @@ begin
     p1 = @df tablita_rt_pre_general violin(generalmarket, :LW, side=:left, label="PrePA", linewidth=0)
     @df tablita_rt_post_general violin!(generalmarket, :LW, side=:right, label="PostPA", linewidth=0)
     plot!(ylims=(-0.2, 0.5), size=psize, legend=:topleft, title="Returns, Exact Whittle Estimator, General Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, generalmarket)
+    xticks!(0.5:1:14.5, generalmarket)
     display(p1)
     png("Figures/LM_Paris_General_LW_PRE_Returns.png")
 end
@@ -156,7 +156,7 @@ begin
     p1 = @df tablita_rt_pre_general violin(generalmarket, :GPH, side=:left, label="PrePA", linewidth=0)
     @df tablita_rt_post_general violin!(generalmarket, :GPH, side=:right, label="PostPA", linewidth=0)
     plot!(ylims=(-0.2, 0.6), size=psize, legend=:topleft, title="Returns, GPH Estimator, General Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, generalmarket)
+    xticks!(0.5:1:14.5, generalmarket)
     display(p1)
     png("Figures/LM_Paris_General_GPH_PRE_Returns.png")
 end
@@ -169,7 +169,7 @@ begin
     p1 = @df tablita_rt_post_general violin(generalmarket, :LW, side=:left, label="PostPA", linewidth=0)
     @df tablita_rt_covid_general violin!(generalmarket, :LW, side=:right, label="COVID", linewidth=0)
     plot!(ylims=(-0.2, 0.62), size=psize, legend=:topleft, title="Returns, Exact Whittle Estimator, General Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, generalmarket)
+    xticks!(0.5:1:14.5, generalmarket)
     display(p1)
     png("Figures/LM_Paris_General_LW_POST_Returns.png")
 end
@@ -179,7 +179,7 @@ begin
     p1 = @df tablita_rt_post_general violin(generalmarket, :GPH, side=:left, label="PostPA", linewidth=0)
     @df tablita_rt_covid_general violin!(generalmarket, :GPH, side=:right, label="COVID", linewidth=0)
     plot!(ylims=(-0.2, 0.7), size=psize, legend=:topleft, title="Returns, GPH Estimator, General Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, generalmarket)
+    xticks!(0.5:1:14.5, generalmarket)
     display(p1)
     png("Figures/LM_Paris_General_GPH_POST_Returns.png")
 end
@@ -192,7 +192,7 @@ begin
     p2 = @df tablita_rt_pre_energy violin(energy, :LW, side=:left, label="PrePA", linewidth=0)
     @df tablita_rt_post_energy violin!(energy, :LW, side=:right, label="PostPA", linewidth=0)
     plot!(ylims=(-0.15, 0.6), size=psize, legend=:topleft, title="Returns, Exact Whittle Estimator, Energy Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, energy)
+    xticks!(0.5:1:14.5, energy)
     display(p2)
     png("Figures/LM_Paris_Energy_LW_PRE_Returns.png")
 end
@@ -202,7 +202,7 @@ begin
     p2 = @df tablita_rt_pre_energy violin(energy, :GPH, side=:left, label="PrePA", linewidth=0)
     @df tablita_rt_post_energy violin!(energy, :GPH, side=:right, label="PostPA", linewidth=0)
     plot!(ylims=(-0.05, 0.7), size=psize, legend=:topleft, title="Returns, GPH Estimator, Energy Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, energy)
+    xticks!(0.5:1:14.5, energy)
     display(p2)
     png("Figures/LM_Paris_Energy_GPH_PRE_Returns.png")
 end
@@ -215,7 +215,7 @@ begin
     p2 = @df tablita_rt_post_energy violin(energy, :LW, side=:left, label="PostPA", linewidth=0)
     @df tablita_rt_covid_energy violin!(energy, :LW, side=:right, label="COVID", linewidth=0)
     plot!(ylims=(-0.2, 0.7), size=psize, legend=:topleft, title="Returns, Exact Whittle Estimator, Energy Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, energy)
+    xticks!(0.5:1:14.5, energy)
     display(p2)
     png("Figures/LM_Paris_Energy_LW_POST_Returns.png")
 end
@@ -225,7 +225,7 @@ begin
     p2 = @df tablita_rt_post_energy violin(energy, :GPH, side=:left, label="PostPA", linewidth=0)
     @df tablita_rt_covid_energy violin!(energy, :GPH, side=:right, label="COVID", linewidth=0)
     plot!(ylims=(-0.05, 0.7), size=psize, legend=:topleft, title="Returns, GPH Estimator, Energy Stocks", xrotation=0)
-    xticks!(0.5:1:15.5, energy)
+    xticks!(0.5:1:14.5, energy)
     display(p2)
     png("Figures/LM_Paris_Energy_GPH_POST_Returns.png")
 end

@@ -9,12 +9,12 @@ include("LM_Paris_Functions.jl")
 #     "AAPL", "MSFT", "GOOG", "AMZN", "BAC", "JPM", "NVO", "GE", "NVDA", "INTC", "PFE", "WBD", "NFLX", "DIS", "META", "PRU", "GE"
 # ]
 
-generalmarket = ["AAPL", "MSFT", "GOOG", "AMZN", "BAC", "JPM", "NVO", "PFE", "GE", "NVDA", "INTC", "WBD", "NFLX", "DIS", "META", "PRU"]
-energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "F", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "SHELL.AS", "EDPFY", "ORRON.ST"]
+generalmarket = ["AAPL", "MSFT", "GOOG", "AMZN", "BAC", "JPM", "NVO", "PFE", "NVDA", "INTC", "WBD", "NFLX", "DIS", "META", "PRU"]
+energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "F", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "EDPFY", "ORRON.ST"]
 
 markets = [generalmarket; energy]
 
-fechas = [Date(2013, 1, 1) Date(2016, 11, 9) Date(2020, 1, 29) Date(2023, 2, 28)]
+fechas = [Date(2013, 1, 1) Date(2016, 11, 4) Date(2020, 1, 29) Date(2023, 2, 28)]
 
 # markets = [
 #  #"GRE.MC", "EDW.F", "S92.DE", "VLA.PA" #miss
@@ -124,9 +124,10 @@ te = choose_options_market_bdws(tablita, "PrePA", "Returns", "Energy", [0.45, 0.
 
 begin
 theme(:ggplot2)
-@df tablita_lt_pre violin(markets, :LW, side=:left, label="PrePA")
+p0 = @df tablita_lt_pre violin(markets, :LW, side=:left, label="PrePA")
 @df tablita_lt_post violin!(markets, :LW, side=:right, label="PostPA")
 plot!(ylims=(-0.2, 0.7), size=(1200, 500), legend=:topleft, title="Log-Returns, Exact Whittle Estimator, General Stocks")
+display(p0)
 #@df tablita_rt_pre dotplot!(string.(":",markets), :GPH, side=:left, label = "", marker=(:black,stroke(0)), mode=:uniform)
 #@df tablita_rt_post dotplot!(string.(":",markets), :GPH, side=:right, label = "", marker=(:gray,stroke(0)), mode=:uniform)
 end
