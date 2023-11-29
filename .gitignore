@@ -25,3 +25,5 @@ Manifest.toml
 
 # Local results
 *.csv
+/Figures/
+/Results/
