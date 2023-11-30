@@ -28,7 +28,7 @@ begin
     plot!(ylims=(-0.2, 0.7), size=(1200, 500), legend=:topleft, title="Log-Returns, Exact Whittle Estimator, All Stocks", xrotation=90)
 end
 
-psize = (1000, 400)
+psize = (800, 300)
 
 begin
     tablita_rt_pre_general = choose_options_market(tablita, "PrePA", "Returns", "General")
