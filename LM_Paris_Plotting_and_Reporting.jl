@@ -76,7 +76,7 @@ end
 begin
     theme(:ggplot2)
     p1 = @df tablita_lt_post_general violin(generalmarket, :LW, side=:left, label="PostPA", linewidth=0)
-    @df tablita_lt_covid_general violin!(generalmarket, :LW, side=:right, label="COVID", linewidth=0)
+    @df tablita_lt_covid_general violin!(generalmarket, :LW, side=:right, label="PostPHEIC", linewidth=0)
     plot!(ylims=(-0.2, 0.6), size=psize, legend=:topleft, title="Log-Returns, Exact Whittle Estimator, General Stocks", xrotation=0)
     xticks!(0.5:1:14.5, generalmarket)
     display(p1)
@@ -86,7 +86,7 @@ end
 begin
     theme(:ggplot2)
     p1 = @df tablita_lt_post_general violin(generalmarket, :GPH, side=:left, label="PostPA", linewidth=0)
-    @df tablita_lt_covid_general violin!(generalmarket, :GPH, side=:right, label="COVID", linewidth=0)
+    @df tablita_lt_covid_general violin!(generalmarket, :GPH, side=:right, label="PostPHEIC", linewidth=0)
     plot!(ylims=(-0.2, 0.65), size=psize, legend=:topleft, title="Log-Returns, GPH Estimator, General Stocks", xrotation=0)
     xticks!(0.5:1:14.5, generalmarket)
     display(p1)
@@ -122,7 +122,7 @@ end
 begin
     theme(:ggplot2)
     p2 = @df tablita_lt_post_energy violin(energy, :LW, side=:left, label="PostPA", linewidth=0)
-    @df tablita_lt_covid_energy violin!(energy, :LW, side=:right, label="COVID", linewidth=0)
+    @df tablita_lt_covid_energy violin!(energy, :LW, side=:right, label="PostPHEIC", linewidth=0)
     plot!(ylims=(-0.2, 0.8), size=psize, legend=:topleft, title="Log-Returns, Exact Whittle Estimator, Energy Stocks", xrotation=0)
     xticks!(0.5:1:14.5, energy)
     display(p2)
@@ -132,7 +132,7 @@ end
 begin
     theme(:ggplot2)
     p2 = @df tablita_lt_post_energy violin(energy, :GPH, side=:left, label="PostPA", linewidth=0)
-    @df tablita_lt_covid_energy violin!(energy, :GPH, side=:right, label="COVID", linewidth=0)
+    @df tablita_lt_covid_energy violin!(energy, :GPH, side=:right, label="PostPHEIC", linewidth=0)
     plot!(ylims=(-0.05, 0.8), size=psize, legend=:topleft, title="Log-Returns, GPH Estimator, Energy Stocks", xrotation=0)
     xticks!(0.5:1:14.5, energy)
     display(p2)
@@ -167,7 +167,7 @@ end
 begin
     theme(:ggplot2)
     p1 = @df tablita_rt_post_general violin(generalmarket, :LW, side=:left, label="PostPA", linewidth=0)
-    @df tablita_rt_covid_general violin!(generalmarket, :LW, side=:right, label="COVID", linewidth=0)
+    @df tablita_rt_covid_general violin!(generalmarket, :LW, side=:right, label="PostPHEIC", linewidth=0)
     plot!(ylims=(-0.2, 0.62), size=psize, legend=:topleft, title="Returns, Exact Whittle Estimator, General Stocks", xrotation=0)
     xticks!(0.5:1:14.5, generalmarket)
     display(p1)
@@ -177,7 +177,7 @@ end
 begin
     theme(:ggplot2)
     p1 = @df tablita_rt_post_general violin(generalmarket, :GPH, side=:left, label="PostPA", linewidth=0)
-    @df tablita_rt_covid_general violin!(generalmarket, :GPH, side=:right, label="COVID", linewidth=0)
+    @df tablita_rt_covid_general violin!(generalmarket, :GPH, side=:right, label="PostPHEIC", linewidth=0)
     plot!(ylims=(-0.2, 0.7), size=psize, legend=:topleft, title="Returns, GPH Estimator, General Stocks", xrotation=0)
     xticks!(0.5:1:14.5, generalmarket)
     display(p1)
@@ -213,7 +213,7 @@ end
 begin
     theme(:ggplot2)
     p2 = @df tablita_rt_post_energy violin(energy, :LW, side=:left, label="PostPA", linewidth=0)
-    @df tablita_rt_covid_energy violin!(energy, :LW, side=:right, label="COVID", linewidth=0)
+    @df tablita_rt_covid_energy violin!(energy, :LW, side=:right, label="PostPHEIC", linewidth=0)
     plot!(ylims=(-0.2, 0.7), size=psize, legend=:topleft, title="Returns, Exact Whittle Estimator, Energy Stocks", xrotation=0)
     xticks!(0.5:1:14.5, energy)
     display(p2)
@@ -223,7 +223,7 @@ end
 begin
     theme(:ggplot2)
     p2 = @df tablita_rt_post_energy violin(energy, :GPH, side=:left, label="PostPA", linewidth=0)
-    @df tablita_rt_covid_energy violin!(energy, :GPH, side=:right, label="COVID", linewidth=0)
+    @df tablita_rt_covid_energy violin!(energy, :GPH, side=:right, label="PostPHEIC", linewidth=0)
     plot!(ylims=(-0.05, 0.7), size=psize, legend=:topleft, title="Returns, GPH Estimator, Energy Stocks", xrotation=0)
     xticks!(0.5:1:14.5, energy)
     display(p2)
