@@ -1,13 +1,14 @@
 display("Starting...")
 
+using Pkg
+Pkg.activate(pwd())
+
 using LongMemory, MarketData, StatsPlots, DataFrames, TimeSeries, CSV
 include("LM_Paris_Functions.jl")
-
 
 generalmarket = ["AAPL", "MSFT", "GOOG", "AMZN", "BAC", "JPM", "NVO", "PFE", "NVDA", "INTC", "WBD", "NFLX", "DIS", "META", "PRU"]
 energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "F", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "EDPFY", "ORRON.ST"]
 
-#markets = generalmarket
 markets = generalmarket
 
 fechas = [Date(2013, 1, 1) Date(2016, 11, 4) Date(2020, 1, 29) Date(2023, 2, 28)]
@@ -18,16 +19,13 @@ nm = length(markets)
 begin
 
     theme(:ggplot2)
-    l = @layout [grid(5, 3)]
-    plot(layout=l)
+    lp = @layout [grid(5, 3)]
+    plot(layout=lp)
 
     for ii = 1:nm
         println("Market: ", markets[ii])
         ### Loading data
         actual = yahoo(markets[ii], YahooOpt(period1=DateTime(fechas[1]))).AdjClose
-
-        ### Computing returns
-        # rt = plain_returns(actual) .^ 2
 
         lt = log_returns(actual) .^ 2
 

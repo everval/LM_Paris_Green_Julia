@@ -1,13 +1,10 @@
 display("Starting...")
 
+using Pkg
+Pkg.activate(pwd())
+
 using LongMemory, MarketData, StatsPlots, DataFrames, TimeSeries, CSV
 include("LM_Paris_Functions.jl")
-
-### Defining markets and dates
-# markets = [
-#     "CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "F", "PLUG", "FSLR", "SPWR", "BEP",
-#     "AAPL", "MSFT", "GOOG", "AMZN", "BAC", "JPM", "NVO", "GE", "NVDA", "INTC", "PFE", "WBD", "NFLX", "DIS", "META", "PRU", "GE"
-# ]
 
 generalmarket = ["AAPL", "MSFT", "GOOG", "AMZN", "BAC", "JPM", "NVO", "PFE", "NVDA", "INTC", "WBD", "NFLX", "DIS", "META", "PRU"]
 energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "F", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "EDPFY", "ORRON.ST"]
@@ -15,13 +12,6 @@ energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "F", "PLUG", "FSLR",
 markets = [generalmarket; energy]
 
 fechas = [Date(2013, 1, 1) Date(2016, 11, 4) Date(2020, 1, 29) Date(2023, 2, 28)]
-
-# markets = [
-#  #"GRE.MC", "EDW.F", "S92.DE", "VLA.PA" #miss
-# "EDPFY", "ERG.MI",  "SCATC.OL", "TENERGY.AT", "VER.VI", "VWS.CO",#BIEN
-# # "BPE5.DE", "GALP.LS", "PGE.WA", "REP.DE",  "RWE.DE",  "TETY.ST", #MISS
-# "BNOR.OL", "OMV.VI", "ORRON.ST", "PEN.OL",  "SHELL.AS", "TLW.L", "TTE.L" #BIEN
-# ]
 
 ## Loading data
 nm = length(markets)

@@ -1,3 +1,8 @@
+display("Starting...")
+
+using Pkg
+Pkg.activate(pwd())
+
 using CSV, DataFrames, StatsPlots, TimeSeries
 include("LM_Paris_Functions.jl")
 tablita = CSV.read("Results/LM_Paris_Routine.csv", DataFrame)
