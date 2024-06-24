@@ -9,7 +9,9 @@ include("LM_Paris_Functions.jl")
 generalmarket = ["AAPL", "MSFT", "GOOG", "AMZN", "BAC", "JPM", "NVO", "PFE", "NVDA", "INTC", "WBD", "NFLX", "DIS", "META", "PRU"]
 energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "F", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "EDPFY", "ORRON.ST"]
 
-markets = generalmarket
+energy2 = ["GE", "CSIQ", "DNN", "CWEN", "GPRE", "SEDG", "SU", "ENPH", "NEE", "IFX.DE", "FRHLF", "GLPEF", "PARXF", "REP.DE", "TPL"]
+
+markets = energy2
 
 fechas = [Date(2013, 1, 1) Date(2016, 11, 4) Date(2020, 1, 29) Date(2023, 2, 28)]
 
@@ -50,4 +52,5 @@ end
 plot!(size=(650, 850))
 
 #png("Figures/Energy_LogReturns.png")
-png("Figures/General_LogReturns.png")
+png("Figures/Energy2_LogReturns.png")
+#png("Figures/General_LogReturns.png")
