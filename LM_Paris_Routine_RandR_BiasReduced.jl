@@ -6,9 +6,10 @@ Pkg.activate(pwd())
 using LongMemory, MarketData, StatsPlots, DataFrames, TimeSeries, CSV
 include("LM_Paris_Functions.jl")
 
-generalmarket = ["AAPL", "MSFT", "GOOG", "AMZN", "BAC", "JPM", "NVO", "PFE", "NVDA", "INTC", "WBD", "NFLX", "DIS", "META", "PRU"]
-#energy = ["ENPH", "NEE", "IFX.DE"]
-energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "F", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "EDPFY", "ORRON.ST", "GE", "CSIQ", "DNN", "CWEN", "GPRE", "SEDG", "SU", "ENPH", "NEE", "IFX.DE", "FRHLF", "GLPEF", "PARXF", "REP.DE", "TPL"]
+generalmarket = [ "MSFT", "AAPL", "NVDA", "AMZN", "META", "GOOG", "LLY", "AVGO", "JPM", "TSLA", "UNH", "V", "PG", "COST", "MA", "JNJ", "HD", "MRK", "ABBV", "WMT", "NFLX", "BAC", "AMD", "KO", "ADBE", "CRM", "PEP", "QCOM", "ORCL", "TMO" ]
+#=["AAPL", "MSFT", "GOOG", "AMZN", "BAC", "JPM", "NVO", "PFE", "NVDA", "INTC", "WBD", "NFLX", "DIS", "META", "PRU"]=#
+
+energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "ECOPETROL.CL", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "EDPFY", "ORRON.ST", "GE", "CSIQ", "DNN", "CWEN", "GPRE", "SEDG", "SU", "ENPH", "NEE", "IFX.DE", "FRHLF", "GLPEF", "PARXF", "REP.DE", "TPL"]
 
 markets = [generalmarket; energy]
 
@@ -134,7 +135,7 @@ for ii = 1:nm
 
 end
 
-CSV.write("Results/LM_Paris_Routine_RandR.csv", tablita)
+CSV.write("Results/LM_Paris_Routine_RandR_Updated.csv", tablita)
 
 #=
 

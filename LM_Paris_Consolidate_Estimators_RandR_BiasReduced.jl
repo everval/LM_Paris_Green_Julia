@@ -4,8 +4,9 @@ using Pkg
 Pkg.activate(pwd())
 
 using LongMemory, MarketData, StatsPlots, DataFrames, TimeSeries, CSV
+using Plots.PlotMeasures
 include("LM_Paris_Functions.jl")
-tablota = CSV.read("Results/LM_Paris_Routine_RandR.csv", DataFrame)
+tablota = CSV.read("Results/LM_Paris_Routine_RandR_Updated.csv", DataFrame)
 
 bands = [0.25 0.85]
 tablita = tablota[ (tablota.Bandwidth.>= bands[1]) .& (tablota.Bandwidth.<= bands[2]) , :]
@@ -15,9 +16,8 @@ energy = ["ENPH", "NEE", "IFX.DE"]
 markets = [generalmarket; energy]
 =#
 
-generalmarket = ["AAPL", "MSFT", "GOOG", "AMZN", "BAC", "JPM", "NVO", "PFE", "NVDA", "INTC", "WBD", "NFLX", "DIS", "META", "PRU"]
-#energy = ["ENPH", "NEE", "IFX.DE"]
-energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "F", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "EDPFY", "ORRON.ST", "GE", "CSIQ", "DNN", "CWEN", "GPRE", "SEDG", "SU", "ENPH", "NEE", "IFX.DE", "FRHLF", "GLPEF", "PARXF", "REP.DE", "TPL"]
+generalmarket = [ "MSFT", "AAPL", "NVDA", "AMZN", "META", "GOOG", "LLY", "AVGO", "JPM", "TSLA", "UNH", "V", "PG", "COST", "MA", "JNJ", "HD", "MRK", "ABBV", "WMT", "NFLX", "BAC", "AMD", "KO", "ADBE", "CRM", "PEP", "QCOM", "ORCL", "TMO" ]
+energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "ECOPETROL.CL", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "EDPFY", "ORRON.ST", "GE", "CSIQ", "DNN", "CWEN", "GPRE", "SEDG", "SU", "ENPH", "NEE", "IFX.DE", "FRHLF", "GLPEF", "PARXF", "REP.DE", "TPL"]
 
 markets = [generalmarket; energy]
 
@@ -56,42 +56,57 @@ xrt = 20
 
 begin
     theme(:dao)
-    p1 = @df tablita_lt_pre_general violin(generalmarket, :Estimate, side=:left, label="PrePA")
-    @df tablita_lt_post_general violin!(generalmarket, :Estimate, side=:right, label="PostPA")
-    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, General Stocks", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt)
+    p1 = @df tablita_lt_pre_general violin(generalmarket[1:15], :Estimate, side=:left, label="PrePA")
+    @df tablita_lt_post_general violin!(generalmarket[1:15], :Estimate, side=:right, label="PostPA")
+    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, General Stocks (1/2)", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt, bottom_margin=37px)
     display(p1)
+end
+
+begin
+theme(:dao)
+p1a = @df tablita_lt_pre_general violin(generalmarket[16:30], :Estimate, side=:left, label="PrePA")
+@df tablita_lt_post_general violin!(generalmarket[16:30], :Estimate, side=:right, label="PostPA")
+plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, General Stocks (2/2)", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt, bottom_margin=37px)
+display(p1a)
 end
 
 begin
     theme(:dao)
     p2 = @df tablita_lt_pre_energy violin(energy[1:15], :Estimate, side=:left, label="PrePA")
     @df tablita_lt_post_energy violin!(energy[1:15], :Estimate, side=:right, label="PostPA")
-    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, Energy Stocks (1/2)",legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt)
+    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, Energy Stocks (1/2)",legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt, bottom_margin=11px)
     display(p2)
 end
 
 begin
     theme(:dao)
-    p3 = @df tablita_lt_pre_energy violin(energy[16:30], :Estimate, side=:left, label="PrePA")
+    p2a = @df tablita_lt_pre_energy violin(energy[16:30], :Estimate, side=:left, label="PrePA")
     @df tablita_lt_post_energy violin!(energy[16:30], :Estimate, side=:right, label="PostPA")
-    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, Energy Stocks (2/2)",legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt)
+    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, Energy Stocks (2/2)",legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt, bottom_margin=33px)
+    display(p2a)
+end
+
+begin
+    theme(:dao)
+    p3 = @df tablita_lt_post_general violin(generalmarket[1:15], :Estimate, side=:left, label="PostPA")
+    @df tablita_lt_covid_general violin!(generalmarket[1:15], :Estimate, side=:right, label="Covid")
+    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, General Stocks (1/2)",legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt, bottom_margin=37px)   
     display(p3)
 end
 
 begin
     theme(:dao)
-    p4 = @df tablita_lt_post_general violin(generalmarket, :Estimate, side=:left, label="PostPA")
-    @df tablita_lt_covid_general violin!(generalmarket, :Estimate, side=:right, label="Covid")
-    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, General Stocks",legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt)   
-    display(p4)
+    p3a = @df tablita_lt_post_general violin(generalmarket[16:30], :Estimate, side=:left, label="PostPA")
+    @df tablita_lt_covid_general violin!(generalmarket[16:30], :Estimate, side=:right, label="Covid")
+    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, General Stocks (2/2)",legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt, bottom_margin=37px)  
+    display(p3a)
 end
-
 
 begin
     theme(:dao)
     p5 = @df tablita_lt_post_energy violin(energy[1:15], :Estimate, side=:left, label="PostPA")
     @df tablita_lt_covid_energy violin!(energy[1:15], :Estimate, side=:right, label="Covid")
-    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, Energy Stocks (1/2)",legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt)
+    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, Energy Stocks (1/2)",legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt, bottom_margin=11px)
     display(p5)
 end
 
@@ -99,6 +114,6 @@ begin
     theme(:dao)
     p6 = @df tablita_lt_post_energy violin(energy[16:30], :Estimate, side=:left, label="PostPA")
     @df tablita_lt_covid_energy violin!(energy[16:30], :Estimate, side=:right, label="Covid")
-    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, Energy Stocks (2/2)",legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation = xrt)
+    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, Energy Stocks (2/2)",legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation = xrt, bottom_margin=33px)
     display(p6)
 end
