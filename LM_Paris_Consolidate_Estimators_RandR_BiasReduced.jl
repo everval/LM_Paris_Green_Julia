@@ -12,8 +12,9 @@ bands = [0.25 0.85]
 tablita = tablota[(tablota.Bandwidth.>=bands[1]).&(tablota.Bandwidth.<=bands[2]), :]
 
 
-generalmarket = ["MSFT", "AAPL", "NVDA", "AMZN", "META", "GOOG", "LLY", "AVGO", "JPM", "TSLA", "UNH", "V", "PG", "COST", "MA", "JNJ", "HD", "MRK", "ABBV", "WMT", "NFLX", "BAC", "AMD", "KO", "ADBE", "CRM", "PEP", "QCOM", "ORCL", "TMO"]
-energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "ECOPETROL.CL", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "EDPFY", "ORRON.ST", "GE", "CSIQ", "DNN", "CWEN", "GPRE", "SEDG", "SU", "ENPH", "NEE", "IFX.DE", "FRHLF", "GLPEF", "PARXF", "REP.DE", "TPL"]
+generalmarket = ["MSFT", "AAPL", "NVDA", "AMZN", "META", "GOOG", "LLY", "AVGO", "JPM", "UNH", "V", "PG", "COST", "MA", "JNJ", "HD", "MRK", "ABBV", "WMT", "NFLX", "BAC", "AMD", "KO", "ADBE", "CRM", "PEP", "QCOM", "ORCL", "TMO", "WFC"]
+
+energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "LIN", "ECOPETROL.CL", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "EDPFY", "TPL", "GE", "CSIQ", "DNN", "CWEN", "GPRE", "SEDG", "SU", "ENPH", "NEE", "IFX.DE", "FRHLF", "GLPEF", "PARXF", "REP.DE", "ORRON.ST"]
 
 markets = [generalmarket; energy]
 
@@ -113,3 +114,26 @@ begin
     violin!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, Energy Stocks (2/2)", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation=xrt, bottom_margin=33px)
     png("Figures/LM_Energy2_LogReturns_COVID_Multiverse_All.png")
 end
+
+#### Tables
+begin
+    smaller_table_logreturns = choose_options_bdws(tablota, "LogReturns", [0.796 0.804])
+    CSV.write("Results/LM_RandR_LogReturns_OptBandwidth.csv", smaller_table_logreturns)
+
+    smaller_table_returns = choose_options_bdws(tablota, "Returns", [0.796 0.804])
+    CSV.write("Results/LM_RandR_Returns_OptBandwidth.csv", smaller_table_returns)
+end
+
+
+### new thing
+#=
+begin
+    theme(:dao)
+    p7 = @df tablita_lt_pre_energy violin(energy[16:30], :Estimate, side=:left, label="PrePA", color = :lightblue)
+    @df tablita_lt_post_energy violin!(energy[16:30], :Estimate, side=:right, label="PostPA", alpha=0.8, color = :darkgreen)
+    @df tablita_lt_covid_energy violin!(energy[16:30], :Estimate, side=:right, label="Covid", alpha=0.5, color = :red)
+    violin!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, Energy Stocks (2/2)", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation=xrt, bottom_margin=33px)
+    #png("Figures/LM_Energy2_LogReturns_Paris_Multiverse_All.png")
+    display(p7)
+en
+=#

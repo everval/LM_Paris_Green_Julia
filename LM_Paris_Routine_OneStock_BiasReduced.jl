@@ -6,12 +6,13 @@ Pkg.activate(pwd())
 using LongMemory, MarketData, StatsPlots, DataFrames, TimeSeries, CSV
 include("LM_Paris_Functions.jl")
 
-generalmarket = [ "MSFT", "AAPL", "NVDA", "AMZN", "META", "GOOG", "LLY", "AVGO", "JPM", "TSLA", "UNH", "V", "PG", "COST", "MA", "JNJ", "HD", "MRK", "ABBV", "WMT", "NFLX", "BAC", "AMD", "KO", "ADBE", "CRM", "PEP", "QCOM", "ORCL", "TMO" ]
-#=["AAPL", "MSFT", "GOOG", "AMZN", "BAC", "JPM", "NVO", "PFE", "NVDA", "INTC", "WBD", "NFLX", "DIS", "META", "PRU"]=#
+generalmarket = ["MSFT", "AAPL", "NVDA", "AMZN", "META", "GOOG", "LLY", "AVGO", "JPM", "UNH", "V", "PG", "COST", "MA", "JNJ", "HD", "MRK", "ABBV", "WMT", "NFLX", "BAC", "AMD", "KO", "ADBE", "CRM", "PEP", "QCOM", "ORCL", "TMO", "WFC"]
 
-energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "ECOPETROL.CL", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "EDPFY", "ORRON.ST", "GE", "CSIQ", "DNN", "CWEN", "GPRE", "SEDG", "SU", "ENPH", "NEE", "IFX.DE", "FRHLF", "GLPEF", "PARXF", "REP.DE", "TPL"]
+energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "LIN", "ECOPETROL.CL", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "EDPFY", "ORRON.ST", "GE", "CSIQ", "DNN", "CWEN", "GPRE", "SEDG", "SU", "ENPH", "NEE", "IFX.DE", "FRHLF", "GLPEF", "PARXF", "REP.DE", "TPL"]
 
-markets = [generalmarket; energy]
+other = ["TSLA"]
+
+markets = other
 
 fechas = [Date(2013, 1, 1) Date(2016, 11, 4) Date(2020, 1, 29) Date(2023, 2, 28)]
 
@@ -29,8 +30,10 @@ for ii = 1:nm
     ### Loading data
     if (markets[ii] ∈ generalmarket)
         ind_market = "General"
-    else
+    elseif (markets[ii] ∈ energy)
         ind_market = "Energy"
+    else
+        ind_market = "Other"
     end
 
     actual = yahoo(markets[ii], YahooOpt(period1=DateTime(fechas[1]))).AdjClose
@@ -163,6 +166,14 @@ begin
     tablita_lt_pre_energy = choose_options_market(tablita, "PrePA", "LogReturns", "Energy")
     tablita_lt_post_energy = choose_options_market(tablita, "PostPA", "LogReturns", "Energy")
     tablita_lt_covid_energy = choose_options_market(tablita, "Covid", "LogReturns", "Energy")
+
+    tablita_lt_pre_other = choose_options_market(tablita, "PrePA", "LogReturns", "Other")
+    tablita_lt_post_other = choose_options_market(tablita, "PostPA", "LogReturns", "Other")
+    tablita_lt_covid_other = choose_options_market(tablita, "Covid", "LogReturns", "Other")
+
+    tablita_rt_pre_other = choose_options_market(tablita, "PrePA", "Returns", "Other")
+    tablita_rt_post_other = choose_options_market(tablita, "PostPA", "Returns", "Other")
+    tablita_rt_covid_other = choose_options_market(tablita, "Covid", "Returns", "Other")
 end
 
 thissize = (1000, 700)
@@ -177,34 +188,11 @@ xrt = 20
 
 begin
     theme(:dao)
-    p1 = @df tablita_lt_pre_general violin(generalmarket, :Estimate, side=:left, label="PrePA")
-    @df tablita_lt_post_general violin!(generalmarket, :Estimate, side=:right, label="PostPA")
-    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, General Stocks", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt)
-    display(p1)
+    p1 = @df tablita_lt_pre_other violin(other, :Estimate, side=:left, label="PrePA", color = :lightblue)
+    @df tablita_lt_post_other violin!(other, :Estimate, side=:right, label="PostPA", alpha=0.5, color = :darkgreen)
+    #@df tablita_lt_post_other violin!(other, :Estimate, side=:left, label="PostPA")
+    @df tablita_lt_covid_other violin!(other, :Estimate, side=:right, label="Covid", alpha=0.5, color = :purple)
+    violin!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, Other Stock", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt)
+    png("Figures/LM_Other_LogReturns_Multiverse_All.png")
 end
 
-begin
-    theme(:dao)
-    p2 = @df tablita_lt_pre_energy violin(energy, :Estimate, side=:left, label="PrePA")
-    @df tablita_lt_post_energy violin!(energy, :Estimate, side=:right, label="PostPA")
-    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, Energy Stocks (1/2)",legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt)
-    display(p2)
-end
-
-
-begin
-    theme(:dao)
-    p4 = @df tablita_lt_post_general violin(generalmarket, :Estimate, side=:left, label="PostPA")
-    @df tablita_lt_covid_general violin!(generalmarket, :Estimate, side=:right, label="Covid")
-    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, General Stocks",legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt)   
-    display(p4)
-end
-
-
-begin
-    theme(:dao)
-    p5 = @df tablita_lt_post_energy violin(energy, :Estimate, side=:left, label="PostPA")
-    @df tablita_lt_covid_energy violin!(energy, :Estimate, side=:right, label="Covid")
-    plot!(ylims=yls, size=thissize, legend=:topleft, title="Log-Returns, Energy Stocks (1/2)",legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, xrotation =xrt)
-    display(p5)
-end
