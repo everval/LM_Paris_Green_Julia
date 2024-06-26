@@ -7,17 +7,7 @@ using LongMemory, MarketData, StatsPlots, DataFrames, TimeSeries, CSV
 include("LM_Paris_Functions.jl")
 
 generalmarket = [ "MSFT", "AAPL", "NVDA", "AMZN", "META", "GOOG", "LLY", "AVGO", "JPM", "TSLA", "UNH", "V", "PG", "COST", "MA", "JNJ", "HD", "MRK", "ABBV", "WMT", "NFLX", "BAC", "AMD", "KO", "ADBE", "CRM", "PEP", "QCOM", "ORCL", "TMO" ]
-#=
-"WFC"
-"ACN"
-"CSCO"
-"AMAT"
-"MCD"
-"DIS"
-"ABT"
-"TXN"
-    ]
-=#
+#=["AAPL", "MSFT", "GOOG", "AMZN", "BAC", "JPM", "NVO", "PFE", "NVDA", "INTC", "WBD", "NFLX", "DIS", "META", "PRU"]=#
 
 energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "TSLA", "ECOPETROL.CL", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "EDPFY", "ORRON.ST", "GE", "CSIQ", "DNN", "CWEN", "GPRE", "SEDG", "SU", "ENPH", "NEE", "IFX.DE", "FRHLF", "GLPEF", "PARXF", "REP.DE", "TPL"]
 
