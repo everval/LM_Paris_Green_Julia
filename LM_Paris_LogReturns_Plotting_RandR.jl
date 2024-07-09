@@ -6,7 +6,7 @@ Pkg.activate(pwd())
 using LongMemory, MarketData, StatsPlots, DataFrames, TimeSeries, CSV
 include("LM_Paris_Functions.jl")
 
-generalmarket = [ "MSFT", "AAPL", "NVDA", "AMZN", "META", "GOOG", "LLY", "AVGO", "JPM", "UNH", "V", "PG", "COST", "MA", "JNJ"]
+generalmarket = ["MSFT", "AAPL", "NVDA", "AMZN", "META", "GOOG", "LLY", "AVGO", "JPM", "UNH", "V", "PG", "COST", "MA", "JNJ"]
 generalmarket2 = ["HD", "MRK", "ABBV", "WMT", "NFLX", "BAC", "AMD", "KO", "ADBE", "CRM", "PEP", "QCOM", "ORCL", "TMO", "WFC"]
 
 energy = ["CVX", "XOM", "BP", "SHEL", "COP", "TTE", "LIN", "ECOPETROL.CL", "PLUG", "FSLR", "SPWR", "BEP", "VWS.CO", "EDPFY", "TPL"]
@@ -29,11 +29,11 @@ begin
 
     for ii = 1:nm
         println("Market: ", markets[ii])
-        actual = yahoo(markets[ii], YahooOpt( period1 = DateTime(fechas[1]) , period2 = DateTime(fechas[4]) ) ).AdjClose
+        actual = yahoo(markets[ii], YahooOpt(period1=DateTime(fechas[1]), period2=DateTime(fechas[4]))).AdjClose
 
         lt = log_returns(actual) .^ 2
 
-        plot!(lt, subplot=ii, label=markets[ii], color=:blue, linewidth=1, line=:dot, xticks = false, yticks = false, size = psize, legendfontsize=lsize, legendfontfamily=myfont)
+        plot!(lt, subplot=ii, label=markets[ii], color=:blue, linewidth=1, line=:dot, xticks=false, yticks=false, size=psize, legendfontsize=lsize, legendfontfamily=myfont)
         vline!([fechas[2]], subplot=ii, color=:red, linewidth=1, line=:dash, label=false)
         vline!([fechas[3]], subplot=ii, color=:red, linewidth=1, line=:dash, label=false)
 
@@ -50,14 +50,20 @@ begin
 
     for ii = 1:nm
         println("Market: ", markets[ii])
-        actual = yahoo(markets[ii], YahooOpt( period1 = DateTime(fechas[1]) , period2 = DateTime(fechas[4]) ) ).AdjClose
+        actual = yahoo(markets[ii], YahooOpt(period1=DateTime(fechas[1]), period2=DateTime(fechas[4]))).AdjClose
 
         lt = log_returns(actual) .^ 2
 
-        plot!(lt, subplot=ii, label=markets[ii], color=:blue, linewidth=1, line=:dot, xticks = false, yticks = false, size = psize, legendfontsize=lsize, legendfontfamily=myfont)
-        vline!([fechas[2]], subplot=ii, color=:red, linewidth=1, line=:dash, label=false)
-        vline!([fechas[3]], subplot=ii, color=:red, linewidth=1, line=:dash, label=false)
-
+        if markets[ii] .!= "ECOPETROL.CL"
+            plot!(lt, subplot=ii, label=markets[ii], color=:blue, linewidth=1, line=:dot, xticks=false, yticks=false, size=psize, legendfontsize=lsize, legendfontfamily=myfont)
+            vline!([fechas[2]], subplot=ii, color=:red, linewidth=1, line=:dash, label=false)
+            vline!([fechas[3]], subplot=ii, color=:red, linewidth=1, line=:dash, label=false)
+        else
+            markets[ii] = "ECOPETROL"
+            plot!(lt, subplot=ii, label=markets[ii], color=:blue, linewidth=1, line=:dot, xticks=false, yticks=false, size=psize, legendfontsize=lsize, legendfontfamily=myfont)
+            vline!([fechas[2]], subplot=ii, color=:red, linewidth=1, line=:dash, label=false)
+            vline!([fechas[3]], subplot=ii, color=:red, linewidth=1, line=:dash, label=false)
+        end
 
     end
     png("C:/Users/eduar/OneDrive - Aalborg Universitet/Research/CLIMATE/LM_Paris_Green_Paper/Volatility-persistence-brown-and-green-stocks-Paris-TandF-/figs/Energy_LogReturns.png")
