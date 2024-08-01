@@ -8,8 +8,8 @@ using Plots.PlotMeasures
 include("LM_Paris_Functions.jl")
 tablota = CSV.read("Results/LM_Paris_Routine_RandR_Updated.csv", DataFrame)
 
-bands = [0.25 0.85]
-tablita = tablota[(tablota.Bandwidth.>=bands[1]).&(tablota.Bandwidth.<=bands[2]), :]
+bands = [0.45 0.85]
+tablita = tablota[(tablota.Bandwidth.>=bands[1]).&(tablota.Bandwidth.<=bands[end]), :]
 
 
 generalmarket = ["MSFT", "AAPL", "NVDA", "AMZN", "META", "GOOG", "LLY", "AVGO", "JPM", "UNH", "V", "PG", "COST", "MA", "JNJ", "HD", "MRK", "ABBV", "WMT", "NFLX", "BAC", "AMD", "KO", "ADBE", "CRM", "PEP", "QCOM", "ORCL", "TMO", "WFC"]
