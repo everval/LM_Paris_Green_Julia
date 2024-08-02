@@ -47,7 +47,7 @@ begin
 end
 
 begin
-  thissize = (1000, 1600)
+  thissize = (1000, 1200)
   yls = (-0.2, 0.65)
   lsize = 12
   tsize = 16
@@ -71,16 +71,16 @@ tlcve = tlcve[tlcve.Bandwidth.∈[bands], :]
 
 begin
   theme(:dao)
-  p1 = @df tlpre violin(energy, :Estimate, side=:right, label="PrePA", alpha=0.65, color=:blue,permute = (:x, :y))
+  p1 = @df tlpre violin(energy, :Estimate, side=:right, label="PrePA", alpha=0.65, color=:brown,permute = (:x, :y))
   @df tlpoe violin!(energy, :Estimate, side=:left, label="PostPA", alpha=0.65, color=:green,permute = (:x, :y))
 #  @df tlcve violin!(energy[1:30], :Estimate, side=:right, label="Covid", alpha = 0.5, color = :red, permute = (:x, :y))
-  @df tlpre dotplot!(energy[1:30], :Estimate, side = :right, label = "", mode = :density,permute = (:x, :y),alpha=0.5, color=:blue)
+  @df tlpre dotplot!(energy[1:30], :Estimate, side = :right, label = "", mode = :density,permute = (:x, :y),alpha=0.5, color=:brown)
   @df tlpoe dotplot!(energy[1:30], :Estimate, side = :left, label = "", mode = :density,permute = (:x, :y),alpha=0.5, color=:green)
 #  @df tlcve dotplot!(energy[1:30], :Estimate, side = :right, label = "", mode = :uniform, permute = (:x, :y),alpha=0.5, color=:red)
-  violin!(xlims=yls, size=thissize, legend=:topright, title="Energy Stocks (Log-Returns)", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, yrotation=xrt, bottom_margin=2px, left_margin=30px, permute = (:x, :y))
+  violin!(xlims=yls, size=thissize, legend=:topright, title="Energy Stocks (Log-Returns)", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, yrotation=xrt, bottom_margin=2px, left_margin=5px, permute = (:x, :y))
   #png("C:/Users/eduar/OneDrive - Aalborg Universitet/Research/CLIMATE/LM_Paris_Green_Paper/Volatility-persistence-brown-and-green-stocks-Paris-TandF-/figs/LM_Energy_LogReturns_Paris_Multiverse_All.png")
   yticks!(p1,collect(0.5:1:30),unique(tlpre.Symbol))
-  display(p1)
+#  display(p1)
 
 end
 
@@ -97,17 +97,17 @@ tlcvg = tlcvg[tlcvg.Bandwidth.∈[bands], :]
 
 begin
   theme(:dao)
-  p2 = @df tlprg violin(generalmarket, :Estimate, side=:right, label="PrePA", alpha=0.65, color=:red,permute = (:x, :y))
+  p2 = @df tlprg violin(generalmarket, :Estimate, side=:right, label="PrePA", alpha=0.65, color= :blue,permute = (:x, :y))
   @df tlpog violin!(generalmarket, :Estimate, side=:left, label="PostPA", alpha=0.65, color=:black,permute = (:x, :y))
 #  @df tlcvg violin!(generalmarket, :Estimate, side=:right, label="Covid", alpha = 0.5, color = :green,permute = (:x, :y))
-  @df tlprg dotplot!(generalmarket, :Estimate, side = :right, label = "", mode = :density,permute = (:x, :y),alpha=0.5, color=:red)
+  @df tlprg dotplot!(generalmarket, :Estimate, side = :right, label = "", mode = :density,permute = (:x, :y),alpha=0.5, color=:blue)
   @df tlpog dotplot!(generalmarket, :Estimate, side = :left, label = "", mode = :density,permute = (:x, :y),alpha=0.5, color=:black)
 #  @df tlcvg dotplot!(generalmarket, :Estimate, side = :right, label = "", mode = :uniform, permute = (:x, :y),alpha=0.5, color=:green)
 
-  violin!(xlims=yls, size=thissize, legend=:topright, title="General Stocks (Log-Returns)", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, yrotation=xrt, bottom_margin=2px, left_margin=20px,permute = (:x, :y))
+  violin!(xlims=yls, size=thissize, legend=:topright, title="General Stocks (Log-Returns)", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, yrotation=xrt, bottom_margin=2px, left_margin=5px,permute = (:x, :y))
   #png("C:/Users/eduar/OneDrive - Aalborg Universitet/Research/CLIMATE/LM_Paris_Green_Paper/Volatility-persistence-brown-and-green-stocks-Paris-TandF-/figs/LM_General_LogReturns_Paris_Multiverse_All.png")
   yticks!(p2,collect(0.5:1:30),unique(tlprg.Symbol))
-  display(p2)
+#  display(p2)
 end
 
 pl = @layout [a b]
@@ -125,10 +125,10 @@ begin
 #  @df tlpre dotplot!(energy[1:30], :Estimate, side = :right, label = "", mode = :density,permute = (:x, :y),alpha=0.5, color=:blue)
   @df tlpoe dotplot!(energy, :Estimate, side = :right, label = "", mode = :density,permute = (:x, :y),alpha=0.5, color=:green)
   @df tlcve dotplot!(energy, :Estimate, side = :left, label = "", mode = :uniform, permute = (:x, :y),alpha=0.5, color=:red)
-  violin!(xlims=yls, size=thissize, legend=:topright, title="Energy Stocks (Log-Returns)", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, yrotation=xrt, bottom_margin=2px, left_margin=30px, permute = (:x, :y))
+  violin!(xlims=yls, size=thissize, legend=:topright, title="Energy Stocks (Log-Returns)", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, yrotation=xrt, bottom_margin=2px, left_margin=5px, permute = (:x, :y))
   #png("C:/Users/eduar/OneDrive - Aalborg Universitet/Research/CLIMATE/LM_Paris_Green_Paper/Volatility-persistence-brown-and-green-stocks-Paris-TandF-/figs/LM_Energy_LogReturns_Paris_Multiverse_All.png")
   yticks!(p3,collect(0.5:1:30),unique(tlpoe.Symbol))
-  display(p3)
+#  display(p3)
 
 end
 
@@ -140,10 +140,10 @@ begin
   @df tlpog dotplot!(generalmarket, :Estimate, side = :right, label = "", mode = :density,permute = (:x, :y),alpha=0.5, color=:black)
   @df tlcvg dotplot!(generalmarket, :Estimate, side = :left, label = "", mode = :uniform, permute = (:x, :y),alpha=0.5, color=:purple)
 
-  violin!(xlims=yls, size=thissize, legend=:topright, title="General Stocks (Log-Returns)", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, yrotation=xrt, bottom_margin=2px, left_margin=20px,permute = (:x, :y))
+  violin!(xlims=yls, size=thissize, legend=:topright, title="General Stocks (Log-Returns)", legendfontsize=lsize, titlefontsize=tsize, tickfontsize=xsize, titlefontfamily=myfont, legendfontfamily=myfont, tickfontfamily=myfont, yrotation=xrt, bottom_margin=2px, left_margin=5px,permute = (:x, :y))
   #png("C:/Users/eduar/OneDrive - Aalborg Universitet/Research/CLIMATE/LM_Paris_Green_Paper/Volatility-persistence-brown-and-green-stocks-Paris-TandF-/figs/LM_General_LogReturns_Paris_Multiverse_All.png")
   yticks!(p4,collect(0.5:1:30),unique(tlpog.Symbol))
-  display(p4)
+#  display(p4)
 end
 
 
