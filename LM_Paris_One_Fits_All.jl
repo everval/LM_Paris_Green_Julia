@@ -29,17 +29,9 @@ tablita[tablita.Symbol.=="ECOPETROL.CL", :Symbol] .= "ECOPETROL"
 tablita[tablita.Symbol.=="ORRON.ST", :Symbol] .= "ORRON"
 
 begin
-  tablita_rt_pre_general = choose_options_market(tablita, "PrePA", "Returns", "General")
-  tablita_rt_post_general = choose_options_market(tablita, "PostPA", "Returns", "General")
-  tablita_rt_covid_general = choose_options_market(tablita, "Covid", "Returns", "General")
-
   tablita_lt_pre_general = choose_options_market(tablita, "PrePA", "LogReturns", "General")
   tablita_lt_post_general = choose_options_market(tablita, "PostPA", "LogReturns", "General")
   tablita_lt_covid_general = choose_options_market(tablita, "Covid", "LogReturns", "General")
-
-  tablita_rt_pre_energy = choose_options_market(tablita, "PrePA", "Returns", "Energy")
-  tablita_rt_post_energy = choose_options_market(tablita, "PostPA", "Returns", "Energy")
-  tablita_rt_covid_energy = choose_options_market(tablita, "Covid", "Returns", "Energy")
 
   tablita_lt_pre_energy = choose_options_market(tablita, "PrePA", "LogReturns", "Energy")
   tablita_lt_post_energy = choose_options_market(tablita, "PostPA", "LogReturns", "Energy")
@@ -112,7 +104,7 @@ end
 
 pl = @layout [a b]
 display(plot(p2, p1, layout=pl))
-
+png("C:/Users/eduar/OneDrive - Aalborg Universitet/Research/CLIMATE/LM_Paris_Green_Paper/Volatility-persistence-brown-and-green-stocks-Paris-TandF-/figs/LM_LogReturns_Paris_Multiverse_All.png")
 
 ##### COVID
 #####
@@ -149,3 +141,4 @@ end
 
 pl = @layout [a b]
 plot(p4, p3, layout=pl)
+png("C:/Users/eduar/OneDrive - Aalborg Universitet/Research/CLIMATE/LM_Paris_Green_Paper/Volatility-persistence-brown-and-green-stocks-Paris-TandF-/figs/LM_LogReturns_Covid_Multiverse_All.png")

@@ -17,7 +17,7 @@ fechas = [Date(2013, 1, 1) Date(2016, 11, 4) Date(2020, 1, 29) Date(2023, 2, 28)
 
 ## Loading data
 lsize = 8
-psize = (650, 900)
+psize = (800, 800)
 myfont = "Computer Modern"
 
 begin
