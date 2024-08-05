@@ -26,7 +26,7 @@ DataFrames.rename!(tablita, [:variable, :value] .=> [:Estimator, :Estimate])
 ####
 
 tablita[tablita.Symbol.=="ECOPETROL.CL", :Symbol] .= "ECOPETROL"
-tablita[tablita.Symbol.=="ORRON.ST", :Symbol] .= "ORRON"
+#tablita[tablita.Symbol.=="ORRON.ST", :Symbol] .= "ORRON"
 
 begin
   tablita_rt_pre_general = choose_options_market(tablita, "PrePA", "Returns", "General")

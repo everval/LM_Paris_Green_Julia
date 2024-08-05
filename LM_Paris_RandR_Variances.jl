@@ -13,7 +13,7 @@ fechas = [Date(2013, 1, 1) Date(2016, 11, 4) Date(2020, 1, 29) Date(2023, 2, 28)
 ## Loading data
 nm = length(markets)
 
-bds = [0.8]
+bds = [0.5, 0.8]
 
 nbd = length(bds)
 
@@ -83,5 +83,6 @@ for ii = 1:nm
 
 end
 
+sort!(tablita, [:Bandwidth])
 CSV.write("Results/LM_Paris_Variances_RandR.csv", tablita)
 
