@@ -49,17 +49,17 @@ begin
   xrt = 45
 end
 
-bands = 0.5:0.05:0.8
+bands = 0.45:0.05:0.85
 
 
 ## Emnergy Stocks
-trpre = tablita_lt_pre_energy
+trpre = tablita_rt_pre_energy
 trpre = trpre[trpre.Bandwidth.∈[bands], :]
 
-trpoe = tablita_lt_post_energy
+trpoe = tablita_rt_post_energy
 trpoe = trpoe[trpoe.Bandwidth.∈[bands], :]
 
-trcve = tablita_lt_covid_energy
+trcve = tablita_rt_covid_energy
 trcve = trcve[trcve.Bandwidth.∈[bands], :]
 
 begin
@@ -79,13 +79,13 @@ end
 
 ## General Stocks[30:-1:1]
 
-trprg = tablita_lt_pre_general
+trprg = tablita_rt_pre_general
 trprg = trprg[trprg.Bandwidth.∈[bands], :]
 
-trpog = tablita_lt_post_general
+trpog = tablita_rt_post_general
 trpog = trpog[trpog.Bandwidth.∈[bands], :]
 
-trcvg = tablita_lt_covid_general
+trcvg = tablita_rt_covid_general
 trcvg = trcvg[trcvg.Bandwidth.∈[bands], :]
 
 begin

@@ -48,7 +48,7 @@ begin
   xrt = 45
 end
 
-bands = 0.5:0.05:0.8
+bands = 0.45:0.05:0.85
 
 
 ## Emnergy Stocks
